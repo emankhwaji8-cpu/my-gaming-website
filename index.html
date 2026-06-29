@@ -1,323 +1,584 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>الألعاب الإلكترونية</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<title>الألعاب الإلكترونية</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#0d0f1a;
+  --card:#13162a;
+  --accent:#6c5ce7;
+  --accent2:#a29bfe;
+  --text:#e8e8f0;
+  --muted:#8888aa;
+  --border:#1e2240;
+  --radius:14px;
+}
+body{
+  font-family:'Cairo',sans-serif;
+  background:var(--dark);
+  color:var(--text);
+  min-height:100vh;
+}
 
-  <style>
-    body{
-      margin:0;
-      font-family: 'Cairo', sans-serif;
-      background-color:#fff;                 
-      transition: background-color .5s ease; 
-    }
-    body:hover{ background-color:#ece4da; }
-    h1{
-      text-align:center;
-      background-color:orangered;
-      color:#fff;
-      padding:15px;
-      text-shadow:2px 3px 4px rgb(56,129,13);
-      margin:0;
-    }
-    p{
-      width:60%;
-      margin:40px auto;
-      padding:20px;
-      font-size:20px;
-      line-height:1.8;
-      text-align:center;
-      background-color:#f9f9f9;
-      border-radius:12px;
-      box-shadow:0 6px 15px rgba(0,0,0,0.25);
-      transition: transform .6s ease, box-shadow .5s ease;
-    }
-    p:hover{
-      transform: rotate(3deg) scale(1.05);
-      box-shadow:0 14px 28px rgba(0,0,0,0.35);
-    }
+/* SCROLL ANIMATIONS */
+.reveal{
+  opacity:0;
+  transform:translateY(36px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
 
-    .gallery{
-      width:90%;
-      max-width:1000px;
-      margin:24px auto 8px;
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap:16px;
-    }
-    .gallery figure{
-      margin:0;
-      overflow:hidden;
-      border-radius:14px;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);
-      background:#fff;
-    }
-    .gallery img{
-      width:100%;
-      height:260px;
-      object-fit:cover;
-      display:block;
-      transition: transform .45s ease;
-    }
-    .gallery img:hover{
-      transform: skew(-4deg) scale(1.04);
-    }
-    .cap{
-      padding:10px 14px;
-      font-size:14px;
-      color:#444;
-    }
+/* HERO */
+.hero{
+  position:relative;
+  text-align:center;
+  padding:56px 24px 64px;
+  background:linear-gradient(160deg,#0d0f1a 0%,#12102b 50%,#0d0f1a 100%);
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:320px;height:320px;
+  background:radial-gradient(circle,rgba(108,92,231,0.22) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-60px;left:-60px;
+  width:260px;height:260px;
+  background:radial-gradient(circle,rgba(162,155,254,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-block;
+  background:rgba(108,92,231,0.18);
+  color:var(--accent2);
+  border:1px solid rgba(108,92,231,0.35);
+  border-radius:30px;
+  font-size:12px;
+  padding:4px 18px;
+  letter-spacing:1px;
+  margin-bottom:22px;
+}
+.hero h1{font-size:48px;font-weight:900;line-height:1.15;color:#fff;margin-bottom:18px;}
+.hero h1 span{color:var(--accent2);}
+.hero p{font-size:16px;color:var(--muted);max-width:560px;margin:0 auto 36px;line-height:2;}
+.hero-cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.btn-primary{
+  background:var(--accent);color:#fff;border:none;
+  padding:13px 30px;border-radius:50px;font-size:15px;
+  font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;
+  transition:transform .2s,background .2s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{background:#7d6df0;transform:translateY(-2px);}
+.btn-ghost{
+  background:transparent;color:var(--accent2);
+  border:1px solid rgba(108,92,231,0.4);
+  padding:13px 30px;border-radius:50px;font-size:15px;
+  font-family:'Cairo',sans-serif;font-weight:500;cursor:pointer;
+  transition:background .2s;text-decoration:none;display:inline-block;
+}
+.btn-ghost:hover{background:rgba(108,92,231,0.12);}
 
-    .games-flex{
-      width:90%;
-      max-width:1000px;
-      margin:10px auto 26px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .games-flex a{
-      text-decoration:none;
-      color:#fff;
-      background:#222;
-      padding:10px 16px;
-      border-radius:12px;
-      box-shadow:0 6px 14px rgba(0,0,0,.2);
-      transition: transform .2s ease, box-shadow .2s ease,  background .2s ease;
-    }
-    .games-flex a:hover{
-      transform: scale(1.08);
-      box-shadow:0 10px 20px rgba(0,0,0,.28);
-      background:#111;
-    }
-    .games-flex a:active{
-      transform: scale(0.96);
-    }
+/* CART BUTTON */
+.cart-fab{
+  position:fixed;
+  top:20px;left:20px;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:50px;
+  padding:10px 18px;
+  font-family:'Cairo',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  z-index:1000;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 4px 20px rgba(108,92,231,0.4);
+  transition:transform .2s,background .2s;
+}
+.cart-fab:hover{background:#7d6df0;transform:scale(1.05);}
+.cart-count{
+  background:#fff;
+  color:var(--accent);
+  border-radius:50%;
+  width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;
+}
 
-    .shop-box{
-      width:90%;
-      max-width:600px;
-      margin: 20px auto;
-      background:#fff;
-      border-radius:14px;
-      box-shadow:0 6px 15px rgba(0,0,0,.18);
-      padding:16px;
-      text-align:center;
-    }
-    .shop-box h2{
-      margin:0 0 12px;
-      font-size:22px;
-    }
-    .form-row{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      align-items:center;
-    }
-    .form-row select,
-    .form-row input[type="number"]{
-      height:42px;
-      border:1px solid #ddd;
-      border-radius:10px;
-      padding:0 10px;
-      min-width:200px;
-      font-size:16px;
-    }
-    .btn{
-      border:0;
-      border-radius:12px;
-      padding:10px 18px;
-      background:orangered;
-      color:#fff;
-      cursor:pointer;
-      font-family: 'Cairo', sans-serif;
-      font-weight: bold;
-    }
+/* CART PANEL */
+.cart-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.6);
+  z-index:1100;
+  backdrop-filter:blur(4px);
+}
+.cart-overlay.open{display:flex;align-items:flex-start;justify-content:flex-end;}
+.cart-panel{
+  background:var(--card);
+  border-left:1px solid var(--border);
+  width:360px;max-width:95vw;
+  height:100vh;
+  overflow-y:auto;
+  padding:24px;
+  animation:slideIn .3s ease;
+}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.cart-panel h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
+.cart-close{background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;line-height:1;}
+.cart-close:hover{color:#fff;}
+.cart-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--border);
+  gap:10px;
+}
+.cart-item-name{font-size:14px;font-weight:600;color:var(--text);}
+.cart-item-qty{font-size:12px;color:var(--muted);}
+.cart-item-price{color:var(--accent2);font-weight:700;font-size:14px;white-space:nowrap;}
+.cart-remove{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:18px;line-height:1;}
+.cart-total{
+  margin-top:20px;
+  background:rgba(108,92,231,0.12);
+  border:1px solid rgba(108,92,231,0.3);
+  border-radius:12px;
+  padding:16px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.cart-total span{font-size:15px;color:var(--muted);}
+.cart-total strong{font-size:20px;color:var(--accent2);}
+.cart-empty{text-align:center;color:var(--muted);padding:40px 0;font-size:15px;}
+.checkout-btn{
+  width:100%;background:var(--accent);color:#fff;border:none;
+  padding:13px;border-radius:10px;font-size:15px;
+  font-family:'Cairo',sans-serif;font-weight:700;
+  cursor:pointer;margin-top:16px;
+  transition:background .2s;
+}
+.checkout-btn:hover{background:#7d6df0;}
 
-    .products{
-      width:90%;
-      max-width:1000px;
-      margin: 0 auto 28px;
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap:20px;
-      text-align:center;
-    }
-    .card{
-      background:#fff;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);
-      transition: transform .25s ease, box-shadow .25s ease;
-      padding:12px;
-    }
-    .card:hover{
-      transform: scale(1.05);
-      box-shadow:0 14px 26px rgba(0,0,0,.25);
-    }
-    .card img{
-      width:100%;
-      height:160px;
-      object-fit:cover;
-      border-radius:10px;
-      margin-bottom:12px;
-    }
-    .price-circle{
-      margin:0 auto;
-      display:block;
-      transition: transform .4s ease;
-    }
-    .price-circle:hover{
-      transform: skew(-8deg) scale(1.05);
-    }
+/* TOAST */
+.toast{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1e2240;border:1px solid var(--accent);
+  color:var(--text);padding:12px 24px;border-radius:50px;
+  font-family:'Cairo',sans-serif;font-size:14px;font-weight:600;
+  z-index:2000;transition:transform .35s ease,opacity .35s ease;
+  opacity:0;pointer-events:none;
+  white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 
-    .video-wrap{
-      width:90%;
-      max-width:1000px;
-      margin: 0 auto 40px;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);
-      background:#000;
-    }
-    .video-wrap video{
-      width:100%;
-      height:auto;
-      display:block;
-    }
-  </style>
+/* SECTIONS */
+.section{padding:44px 24px;}
+.section-label{font-size:11px;letter-spacing:2px;color:var(--accent2);text-transform:uppercase;margin-bottom:8px;}
+.section-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:28px;}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:920px;margin:0 auto;}
+.gallery figure{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--card);}
+.gallery img{width:100%;height:230px;object-fit:cover;display:block;transition:transform .4s ease;}
+.gallery figure:hover img{transform:scale(1.06);}
+.gallery figcaption{position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(13,15,26,0.9));font-size:14px;color:#fff;font-weight:600;}
+
+/* NAV LINKS */
+.games-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:920px;margin:0 auto;}
+.game-link{
+  text-decoration:none;color:var(--text);background:var(--card);
+  border:1px solid var(--border);padding:10px 22px;border-radius:50px;
+  font-size:14px;font-weight:500;
+  transition:border-color .2s,color .2s,transform .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.game-link:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-2px);}
+.game-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;}
+
+/* SHOP */
+.shop-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 26px;max-width:560px;margin:0 auto;}
+.shop-card h2{font-size:20px;font-weight:700;color:#fff;margin-bottom:24px;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.form-group label{font-size:13px;color:var(--muted);}
+.form-group select,
+.form-group input[type="number"]{
+  background:#0d0f1a;border:1px solid var(--border);color:var(--text);
+  border-radius:10px;padding:11px 14px;font-size:15px;
+  font-family:'Cairo',sans-serif;outline:none;transition:border-color .2s;width:100%;
+}
+.form-group select:focus,
+.form-group input[type="number"]:focus{border-color:var(--accent);}
+.form-group select option{background:#13162a;}
+
+/* PRICE DISPLAY */
+.price-display{
+  background:rgba(108,92,231,0.1);
+  border:1px solid rgba(108,92,231,0.25);
+  border-radius:10px;
+  padding:12px 16px;
+  margin-bottom:16px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.price-display span{font-size:13px;color:var(--muted);}
+.price-display strong{font-size:18px;color:var(--accent2);}
+
+.shop-btn{
+  width:100%;background:var(--accent);color:#fff;border:none;
+  padding:13px;border-radius:10px;font-size:16px;
+  font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;
+  margin-top:8px;transition:background .2s,transform .2s;
+}
+.shop-btn:hover{background:#7d6df0;transform:translateY(-1px);}
+
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:920px;margin:0 auto;}
+.product-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:transform .25s,border-color .25s;
+}
+.product-card:hover{transform:translateY(-4px);border-color:rgba(108,92,231,0.4);}
+.product-card img{width:100%;height:170px;object-fit:cover;display:block;}
+.product-info{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}
+.product-name{font-size:13px;color:var(--muted);}
+.price-badge{
+  background:rgba(108,92,231,0.18);color:var(--accent2);
+  border:1px solid rgba(108,92,231,0.3);
+  border-radius:30px;padding:4px 14px;font-size:14px;font-weight:700;
+}
+.add-to-cart{
+  background:none;border:1px solid rgba(108,92,231,0.3);
+  color:var(--accent2);border-radius:8px;padding:6px 12px;
+  font-family:'Cairo',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;transition:background .2s,transform .2s;
+  margin-top:8px;width:100%;
+}
+.add-to-cart:hover{background:rgba(108,92,231,0.15);transform:scale(1.02);}
+
+/* VIDEO */
+.video-section{padding:0 24px 52px;}
+.video-wrap{max-width:920px;margin:0 auto;border-radius:18px;overflow:hidden;border:1px solid var(--border);background:#000;}
+.video-wrap video{width:100%;height:auto;display:block;}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);max-width:920px;margin:0 auto;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:22px 24px;text-align:center;font-size:13px;color:var(--muted);}
+footer span{color:var(--accent2);}
+</style>
 </head>
 <body>
-  <h1>الألعاب الإلكترونية</h1>
 
-  <p>
-    الألعاب الإلكترونية أصبحت جزءًا مهمًا من حياتنا اليومية، فهي وسيلة للترفيه والتسلية،
-    كما تُسهم في تنمية مهارات التفكير السريع واتخاذ القرارات. ومع تطور التكنولوجيا،
-    تنوّعت لتشمل الهواتف الذكية والحواسيب وأجهزة الألعاب الحديثة، مما جعلها هواية
-    مفضلة لدى ملايين الأشخاص حول العالم.
-  </p>
+<!-- CART FAB -->
+<button class="cart-fab" onclick="openCart()">
+  🛒 السلة
+  <span class="cart-count" id="cartCount">0</span>
+</button>
 
-  <section class="gallery">
-    <figure>
-      <img src="e1.jpg" alt="لعبة 1">
-      <figcaption class="cap">لعبة أكشن </figcaption>
-    </figure>
-    <figure>
-      <img src="e2.jpg" alt="لعبة 2">
-      <figcaption class="cap">لعبة سباق </figcaption>
-    </figure>
-    <figure>
-      <img src="e3.webp" alt="لعبة 3">
-      <figcaption class="cap">مغامرات 3</figcaption>
-    </figure>
-    <figure>
-      <img src="e4.jpg" alt="لعبة 4">
-      <figcaption class="cap">أونلاين 4</figcaption>
-    </figure>
-  </section>
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
+  <div class="cart-panel">
+    <h3>سلة المشتريات <button class="cart-close" onclick="closeCart()">×</button></h3>
+    <div id="cartItems"><p class="cart-empty">السلة فارغة 🛒</p></div>
+    <div class="cart-total" id="cartTotal" style="display:none">
+      <span>المجموع الكلي</span>
+      <strong id="totalPrice">0.00$</strong>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" style="display:none">إتمام الشراء ←</button>
+  </div>
+</div>
 
-  <nav class="games-flex">
-    <a href="https://www.fortnite.com" target="_blank">Fortnite</a>
-    <a href="https://www.minecraft.net" target="_blank">Minecraft</a>
-    <a href="https://www.pubg.com" target="_blank">PUBG</a>
-    <a href="https://playvalorant.com" target="_blank">Valorant</a>
-    <a href="https://www.rocketleague.com" target="_blank">Rocket League</a>
-    <a href="https://www.callofduty.com" target="_blank">Call of Duty</a>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🎮 عالم الألعاب الإلكترونية</div>
+  <h1>العب. تنافس.<br/><span>انتصر.</span></h1>
+  <p>الألعاب الإلكترونية أصبحت جزءًا من حياتنا اليومية، تُطوّر مهارات التفكير السريع واتخاذ القرار، وتجمع ملايين اللاعبين حول العالم في تجربة لا تُنسى.</p>
+  <div class="hero-cta">
+    <a class="btn-primary" href="#shop">ابدأ الشراء</a>
+    <a class="btn-ghost" href="#gallery">استكشف الألعاب</a>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="section reveal" id="gallery">
+  <p class="section-label">لقطات من عالم الألعاب</p>
+  <p class="section-title">استكشف الأجناس</p>
+  <div class="gallery">
+    <figure>
+      <img src="e1.jpg" alt="لعبة أكشن"/>
+      <figcaption>🔥 أكشن</figcaption>
+    </figure>
+    <figure>
+      <img src="e2.jpg" alt="لعبة سباق"/>
+      <figcaption>🏎️ سباق</figcaption>
+    </figure>
+    <figure>
+      <img src="e3.webp" alt="مغامرات"/>
+      <figcaption>⚔️ مغامرات</figcaption>
+    </figure>
+    <figure>
+      <img src="e4.jpg" alt="أونلاين"/>
+      <figcaption>🌐 أونلاين</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GAME LINKS -->
+<section class="section reveal">
+  <p class="section-label">الألعاب الشائعة</p>
+  <p class="section-title">العب الآن</p>
+  <nav class="games-nav">
+    <a class="game-link" href="https://www.fortnite.com" target="_blank"><span class="game-dot"></span>Fortnite</a>
+    <a class="game-link" href="https://www.minecraft.net" target="_blank"><span class="game-dot"></span>Minecraft</a>
+    <a class="game-link" href="https://www.pubg.com" target="_blank"><span class="game-dot"></span>PUBG</a>
+    <a class="game-link" href="https://playvalorant.com" target="_blank"><span class="game-dot"></span>Valorant</a>
+    <a class="game-link" href="https://www.rocketleague.com" target="_blank"><span class="game-dot"></span>Rocket League</a>
+    <a class="game-link" href="https://www.callofduty.com" target="_blank"><span class="game-dot"></span>Call of Duty</a>
   </nav>
+</section>
 
-  <section class="shop-box">
-    <h2>شراء لعبة إلكترونية</h2>
-    <form>
-      <div class="form-row">
-        <label for="gameSelect">اختر اللعبة:</label>
-        <select id="gameSelect" required>
-          <option value="">— اختر —</option>
-          <option value="Fortnite">Fortnite</option>
-          <option value="Minecraft">Minecraft</option>
-          <option value="PUBG">PUBG</option>
-          <option value="Valorant">Valorant</option>
-        </select>
+<div class="divider"></div>
 
-        <label for="qty">الكمية:</label>
-        <input id="qty" type="number" min="1" value="1" required />
+<!-- SHOP -->
+<section class="section reveal" id="shop">
+  <p class="section-label">المتجر الإلكتروني</p>
+  <p class="section-title">اشتر لعبتك</p>
+  <div class="shop-card">
+    <h2>🛒 شراء لعبة إلكترونية</h2>
+    <div class="form-group">
+      <label for="gameSelect">اختر اللعبة</label>
+      <select id="gameSelect" onchange="updatePrice()">
+        <option value="">— اختر —</option>
+        <option value="fortnite" data-price="14.99">Fortnite — 14.99$</option>
+        <option value="minecraft" data-price="19.90">Minecraft — 19.90$</option>
+        <option value="pubg" data-price="9.50">PUBG — 9.50$</option>
+        <option value="valorant" data-price="24.00">Valorant — 24.00$</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="qty">الكمية</label>
+      <input id="qty" type="number" min="1" value="1" oninput="updatePrice()"/>
+    </div>
+    <div class="price-display">
+      <span>الإجمالي</span>
+      <strong id="livePrice">0.00$</strong>
+    </div>
+    <button class="shop-btn" onclick="addFromForm()">أضف إلى السلة ←</button>
+  </div>
+</section>
 
-        <button type="submit" class="btn">شراء</button>
+<div class="divider"></div>
+
+<!-- PRODUCTS -->
+<section class="section reveal">
+  <p class="section-label">منتجات مميزة</p>
+  <p class="section-title">أحدث الإصدارات</p>
+  <div class="products">
+    <div class="product-card">
+      <img src="x1.avif" alt="لعبة 1"/>
+      <div class="product-info">
+        <span class="product-name">إصدار ١</span>
+        <span class="price-badge">14.99$</span>
       </div>
-    </form>
-  </section>
-
-  <section class="products">
-    <div class="card">
-      <img src="x1.avif" alt="لعبة 1">
-      <svg class="price-circle" width="70" height="70">
-        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
-        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">14.99$</text>
-      </svg>
+      <div style="padding:0 14px 14px">
+        <button class="add-to-cart" onclick="addToCart('إصدار ١', 14.99)">+ أضف للسلة</button>
+      </div>
     </div>
-
-    <div class="card">
-      <img src="x2.jfif" alt="لعبة 2">
-      <svg class="price-circle" width="70" height="70">
-        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
-        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">19.90$</text>
-      </svg>
+    <div class="product-card">
+      <img src="x2.jfif" alt="لعبة 2"/>
+      <div class="product-info">
+        <span class="product-name">إصدار ٢</span>
+        <span class="price-badge">19.90$</span>
+      </div>
+      <div style="padding:0 14px 14px">
+        <button class="add-to-cart" onclick="addToCart('إصدار ٢', 19.90)">+ أضف للسلة</button>
+      </div>
     </div>
-
-    <div class="card">
-      <img src="x3.avif" alt="لعبة 3">
-      <svg class="price-circle" width="70" height="70">
-        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
-        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">9.50$</text>
-      </svg>
+    <div class="product-card">
+      <img src="x3.avif" alt="لعبة 3"/>
+      <div class="product-info">
+        <span class="product-name">إصدار ٣</span>
+        <span class="price-badge">9.50$</span>
+      </div>
+      <div style="padding:0 14px 14px">
+        <button class="add-to-cart" onclick="addToCart('إصدار ٣', 9.50)">+ أضف للسلة</button>
+      </div>
     </div>
-
-    <div class="card">
-      <img src="x4.jfif" alt="لعبة 4">
-      <svg class="price-circle" width="70" height="70">
-        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
-        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">24.00$</text>
-      </svg>
+    <div class="product-card">
+      <img src="x4.jfif" alt="لعبة 4"/>
+      <div class="product-info">
+        <span class="product-name">إصدار ٤</span>
+        <span class="price-badge">24.00$</span>
+      </div>
+      <div style="padding:0 14px 14px">
+        <button class="add-to-cart" onclick="addToCart('إصدار ٤', 24.00)">+ أضف للسلة</button>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
+<!-- VIDEO -->
+<div class="video-section reveal">
   <div class="video-wrap">
-<iframe width="100%" height="450" src="https://www.youtube.com/embed/RkC0l4iekYo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  </div>
+    <video controls poster="media/poster.jpg">
+      <source src="jj.mp4" type="video/mp4"/>
+    </video>
+  </div>
+</div>
 
-  <script>
-    const gamePrices = {
-      'Fortnite': 0,       
-      'Minecraft': 19.90,
-      'PUBG': 14.99,
-      'Valorant': 0        
-    };
+<!-- FOOTER -->
+<footer>
+  صُمِّم بشغف لمحبي الألعاب ❤️ &nbsp;|&nbsp; <span>الألعاب الإلكترونية</span>
+</footer>
 
-    const shopForm = document.querySelector('form');
+<script>
+// ========== CART STATE ==========
+let cart = [];
 
-    shopForm.addEventListener('submit', function(event) {
-      event.preventDefault();
+const prices = {
+  fortnite: 14.99,
+  minecraft: 19.90,
+  pubg: 9.50,
+  valorant: 24.00
+};
 
-      const chosenGame = document.getElementById('gameSelect').value;
-      const quantity = parseInt(document.getElementById('qty').value);
+const names = {
+  fortnite: 'Fortnite',
+  minecraft: 'Minecraft',
+  pubg: 'PUBG',
+  valorant: 'Valorant'
+};
 
-      const pricePerUnit = gamePrices[chosenGame];
-      const totalPrice = pricePerUnit * quantity;
+// ========== LIVE PRICE ==========
+function updatePrice() {
+  const sel = document.getElementById('gameSelect');
+  const qty = parseInt(document.getElementById('qty').value) || 1;
+  const opt = sel.options[sel.selectedIndex];
+  const price = opt ? parseFloat(opt.dataset.price) || 0 : 0;
+  document.getElementById('livePrice').textContent = (price * qty).toFixed(2) + '$';
+}
 
-      let message = `شكرًا لطلبك! 🎮\nلقد اخترت: ${chosenGame}\nالكمية: ${quantity}\n`;
-      
-      if (totalPrice === 0) {
-        message += `السعر الإجمالي: مجانية! ✨`;
-      } else {
-        message += `السعر الإجمالي: $${totalPrice.toFixed(2)}`;
-      }
+// ========== ADD FROM FORM ==========
+function addFromForm() {
+  const sel = document.getElementById('gameSelect');
+  const qty = parseInt(document.getElementById('qty').value) || 1;
+  if (!sel.value) { showToast('⚠️ اختر لعبة أولاً'); return; }
+  for (let i = 0; i < qty; i++) addToCart(names[sel.value], prices[sel.value], false);
+  renderCart();
+  showToast('✅ تمت الإضافة إلى السلة!');
+}
 
-      alert(message);
-    });
-  </script>
+// ========== ADD TO CART ==========
+function addToCart(name, price, render = true) {
+  const existing = cart.find(i => i.name === name);
+  if (existing) { existing.qty++; }
+  else { cart.push({ name, price, qty: 1 }); }
+  if (render) { renderCart(); showToast('✅ ' + name + ' أُضيفت للسلة!'); }
+}
+
+// ========== REMOVE FROM CART ==========
+function removeFromCart(name) {
+  cart = cart.filter(i => i.name !== name);
+  renderCart();
+  showToast('🗑️ تمت الإزالة');
+}
+
+// ========== RENDER CART ==========
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+  const totalPrice = document.getElementById('totalPrice');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const countEl = document.getElementById('cartCount');
+
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+  countEl.textContent = totalQty;
+
+  if (cart.length === 0) {
+    container.innerHTML = '<p class="cart-empty">السلة فارغة 🛒</p>';
+    totalEl.style.display = 'none';
+    checkoutBtn.style.display = 'none';
+    return;
+  }
+
+  let html = '';
+  let total = 0;
+  cart.forEach(item => {
+    const sub = item.price * item.qty;
+    total += sub;
+    html += `
+      <div class="cart-item">
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-qty">الكمية: ${item.qty} × ${item.price.toFixed(2)}$</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="cart-item-price">${sub.toFixed(2)}$</span>
+          <button class="cart-remove" onclick="removeFromCart('${item.name}')">×</button>
+        </div>
+      </div>`;
+  });
+
+  container.innerHTML = html;
+  totalEl.style.display = 'flex';
+  checkoutBtn.style.display = 'block';
+  totalPrice.textContent = total.toFixed(2) + '$';
+}
+
+// ========== CART OPEN/CLOSE ==========
+function openCart() {
+  document.getElementById('cartOverlay').classList.add('open');
+}
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+}
+function closeCartOutside(e) {
+  if (e.target === document.getElementById('cartOverlay')) closeCart();
+}
+
+// ========== CHECKOUT ==========
+function checkout() {
+  if (cart.length === 0) return;
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
+  cart = [];
+  renderCart();
+  closeCart();
+  showToast('🎉 تم الشراء بنجاح! المجموع: ' + total + '$');
+}
+
+// ========== TOAST ==========
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ========== SCROLL REVEAL ==========
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
 </body>
 </html>
