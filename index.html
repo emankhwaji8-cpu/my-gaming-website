@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الألعاب الإلكترونية</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      margin:0;
+      font-family: 'Cairo', sans-serif;
+      background-color:#fff;                 
+      transition: background-color .5s ease; 
+    }
+    body:hover{ background-color:#ece4da; }
+    h1{
+      text-align:center;
+      background-color:orangered;
+      color:#fff;
+      padding:15px;
+      text-shadow:2px 3px 4px rgb(56,129,13);
+      margin:0;
+    }
+    p{
+      width:60%;
+      margin:40px auto;
+      padding:20px;
+      font-size:20px;
+      line-height:1.8;
+      text-align:center;
+      background-color:#f9f9f9;
+      border-radius:12px;
+      box-shadow:0 6px 15px rgba(0,0,0,0.25);
+      transition: transform .6s ease, box-shadow .5s ease;
+    }
+    p:hover{
+      transform: rotate(3deg) scale(1.05);
+      box-shadow:0 14px 28px rgba(0,0,0,0.35);
+    }
+
+    .gallery{
+      width:90%;
+      max-width:1000px;
+      margin:24px auto 8px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:16px;
+    }
+    .gallery figure{
+      margin:0;
+      overflow:hidden;
+      border-radius:14px;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+      background:#fff;
+    }
+    .gallery img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      display:block;
+      transition: transform .45s ease;
+    }
+    .gallery img:hover{
+      transform: skew(-4deg) scale(1.04);
+    }
+    .cap{
+      padding:10px 14px;
+      font-size:14px;
+      color:#444;
+    }
+
+    .games-flex{
+      width:90%;
+      max-width:1000px;
+      margin:10px auto 26px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .games-flex a{
+      text-decoration:none;
+      color:#fff;
+      background:#222;
+      padding:10px 16px;
+      border-radius:12px;
+      box-shadow:0 6px 14px rgba(0,0,0,.2);
+      transition: transform .2s ease, box-shadow .2s ease,  background .2s ease;
+    }
+    .games-flex a:hover{
+      transform: scale(1.08);
+      box-shadow:0 10px 20px rgba(0,0,0,.28);
+      background:#111;
+    }
+    .games-flex a:active{
+      transform: scale(0.96);
+    }
+
+    .shop-box{
+      width:90%;
+      max-width:600px;
+      margin: 20px auto;
+      background:#fff;
+      border-radius:14px;
+      box-shadow:0 6px 15px rgba(0,0,0,.18);
+      padding:16px;
+      text-align:center;
+    }
+    .shop-box h2{
+      margin:0 0 12px;
+      font-size:22px;
+    }
+    .form-row{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:center;
+    }
+    .form-row select,
+    .form-row input[type="number"]{
+      height:42px;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:0 10px;
+      min-width:200px;
+      font-size:16px;
+    }
+    .btn{
+      border:0;
+      border-radius:12px;
+      padding:10px 18px;
+      background:orangered;
+      color:#fff;
+      cursor:pointer;
+      font-family: 'Cairo', sans-serif;
+      font-weight: bold;
+    }
+
+    .products{
+      width:90%;
+      max-width:1000px;
+      margin: 0 auto 28px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap:20px;
+      text-align:center;
+    }
+    .card{
+      background:#fff;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+      transition: transform .25s ease, box-shadow .25s ease;
+      padding:12px;
+    }
+    .card:hover{
+      transform: scale(1.05);
+      box-shadow:0 14px 26px rgba(0,0,0,.25);
+    }
+    .card img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:10px;
+      margin-bottom:12px;
+    }
+    .price-circle{
+      margin:0 auto;
+      display:block;
+      transition: transform .4s ease;
+    }
+    .price-circle:hover{
+      transform: skew(-8deg) scale(1.05);
+    }
+
+    .video-wrap{
+      width:90%;
+      max-width:1000px;
+      margin: 0 auto 40px;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+      background:#000;
+    }
+    .video-wrap video{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+  </style>
+</head>
+<body>
+  <h1>الألعاب الإلكترونية</h1>
+
+  <p>
+    الألعاب الإلكترونية أصبحت جزءًا مهمًا من حياتنا اليومية، فهي وسيلة للترفيه والتسلية،
+    كما تُسهم في تنمية مهارات التفكير السريع واتخاذ القرارات. ومع تطور التكنولوجيا،
+    تنوّعت لتشمل الهواتف الذكية والحواسيب وأجهزة الألعاب الحديثة، مما جعلها هواية
+    مفضلة لدى ملايين الأشخاص حول العالم.
+  </p>
+
+  <section class="gallery">
+    <figure>
+      <img src="e1.jpg" alt="لعبة 1">
+      <figcaption class="cap">لعبة أكشن </figcaption>
+    </figure>
+    <figure>
+      <img src="e2.jpg" alt="لعبة 2">
+      <figcaption class="cap">لعبة سباق </figcaption>
+    </figure>
+    <figure>
+      <img src="e3.webp" alt="لعبة 3">
+      <figcaption class="cap">مغامرات 3</figcaption>
+    </figure>
+    <figure>
+      <img src="e4.jpg" alt="لعبة 4">
+      <figcaption class="cap">أونلاين 4</figcaption>
+    </figure>
+  </section>
+
+  <nav class="games-flex">
+    <a href="https://www.fortnite.com" target="_blank">Fortnite</a>
+    <a href="https://www.minecraft.net" target="_blank">Minecraft</a>
+    <a href="https://www.pubg.com" target="_blank">PUBG</a>
+    <a href="https://playvalorant.com" target="_blank">Valorant</a>
+    <a href="https://www.rocketleague.com" target="_blank">Rocket League</a>
+    <a href="https://www.callofduty.com" target="_blank">Call of Duty</a>
+  </nav>
+
+  <section class="shop-box">
+    <h2>شراء لعبة إلكترونية</h2>
+    <form>
+      <div class="form-row">
+        <label for="gameSelect">اختر اللعبة:</label>
+        <select id="gameSelect" required>
+          <option value="">— اختر —</option>
+          <option value="Fortnite">Fortnite</option>
+          <option value="Minecraft">Minecraft</option>
+          <option value="PUBG">PUBG</option>
+          <option value="Valorant">Valorant</option>
+        </select>
+
+        <label for="qty">الكمية:</label>
+        <input id="qty" type="number" min="1" value="1" required />
+
+        <button type="submit" class="btn">شراء</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="products">
+    <div class="card">
+      <img src="x1.avif" alt="لعبة 1">
+      <svg class="price-circle" width="70" height="70">
+        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
+        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">14.99$</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <img src="x2.jfif" alt="لعبة 2">
+      <svg class="price-circle" width="70" height="70">
+        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
+        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">19.90$</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <img src="x3.avif" alt="لعبة 3">
+      <svg class="price-circle" width="70" height="70">
+        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
+        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">9.50$</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <img src="x4.jfif" alt="لعبة 4">
+      <svg class="price-circle" width="70" height="70">
+        <circle cx="35" cy="35" r="30" fill="#2196f3"/>
+        <text x="35" y="40" text-anchor="middle" font-size="14" fill="white">24.00$</text>
+      </svg>
+    </div>
+  </section>
+
+  <div class="video-wrap">
+    <video controls>
+      <source src="jj.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    const gamePrices = {
+      'Fortnite': 0,       
+      'Minecraft': 19.90,
+      'PUBG': 14.99,
+      'Valorant': 0        
+    };
+
+    const shopForm = document.querySelector('form');
+
+    shopForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const chosenGame = document.getElementById('gameSelect').value;
+      const quantity = parseInt(document.getElementById('qty').value);
+
+      const pricePerUnit = gamePrices[chosenGame];
+      const totalPrice = pricePerUnit * quantity;
+
+      let message = `شكرًا لطلبك! 🎮\nلقد اخترت: ${chosenGame}\nالكمية: ${quantity}\n`;
+      
+      if (totalPrice === 0) {
+        message += `السعر الإجمالي: مجانية! ✨`;
+      } else {
+        message += `السعر الإجمالي: $${totalPrice.toFixed(2)}`;
+      }
+
+      alert(message);
+    });
+  </script>
+</body>
+</html>
